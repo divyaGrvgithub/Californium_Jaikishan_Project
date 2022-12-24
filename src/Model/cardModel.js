@@ -1,14 +1,22 @@
-const mongoose = require ("mongoose" ) 
-const cardSchema = new mongoose.Schema ({
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
-   cardNumber : String,
-   cardType  : String ,
-   customerName : String,
-   status : String,
-   vision : String,
-   customerID : String,
+const cardSchema = new mongoose.Schema({
+    cardNumber: String,
+    cardType: {
+        type: String
+    },
+    customerName: String,
+    status: {
+        type: String,
+        default: 'Active',
+        description: ' ACTIVE / INACTIVE'
+    },
+    vision: String,
+    customerID: {
+        type: ObjectId,
+        ref: 'Customer'
+    }
+});
 
-
-},  {timestamps:true})
-
-module.exports = mongoose.model("Card" ,cardSchema )
+module.exports = mongoose.model('Card', cardSchema);
